@@ -1,6 +1,11 @@
-import app from "./app.js"
-import { connectDB } from "./db.js"
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-connectDB();
-app.listen(4000)
-console.log("Run Server on port", 4000)
+app.get('/', (req, res) => {
+  res.send('¡Hola, mundo!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
