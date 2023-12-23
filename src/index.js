@@ -1,11 +1,6 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+import app from "./app.js"
+import { connectDB } from "./db.js"
 
-app.get('/', (req, res) => {
-  res.send('¡Hola, mundo!');
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+connectDB();
+app.listen(3000)
+console.log("Run Server on port", 3000)
