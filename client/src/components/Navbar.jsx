@@ -11,7 +11,7 @@ function Navbar() {
                 {isAuthenticated ? (
                     <>
                         <li>
-                        Welcome {user.username}
+                            {user !== null ? `Welcome ${user.username}` : 'Welcome Guest'}
                         </li>
                         <li>
                             <Link to={'/add-task'} className='bg-indigo-500 px-4 py-1 rounded-sm'>Add Task</Link>
