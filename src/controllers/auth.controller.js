@@ -86,20 +86,23 @@ export const profile = async (req, res) => {
 };
 
 export const verifyToken = async (req, res) => {
-    const { token } = req.cookies;
-
-    if (!token) return res.status(401).json({ message: "Unauthorized" });
-
-    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
-        if (err) return res.status(401).json({ message: "Unauthorized" });
-
-        const userFound = await User.findById(user.id);
-        if (!userFound) return res.status(401).json({ message: "Unauthorized" });
-
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized: No token provided" });
+        }
+        const decoded = jwt.verify(token, TOKEN_SECRET);
+        const userFound = await User.findById(decoded.id);
+        if (!userFound) {
+            return res.status(401).json({ message: "Unauthorized: User not found" });
+        }
         return res.json({
             id: userFound._id,
             username: userFound.username,
             email: userFound.email,
         });
-    });
+    } catch (error) {
+        console.error(error);
+        return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    }
 };
