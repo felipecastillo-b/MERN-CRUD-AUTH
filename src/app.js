@@ -9,7 +9,7 @@ import taskRoutes from "./routes/tasks.routes.js"
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://mern-crud-auth-front.onrender.com'],
     credentials: true
 }));
 app.use(morgan("dev"));
