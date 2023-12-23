@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
     //origin: 'http://localhost:5173',
     //origin: 'https://mern-crud-auth-front.onrender.com',
-    origin: '*',
+    origin: 'https://mern-crud-auth.netlify.app',
     credentials: true
 }));
 app.use(morgan("dev"));
